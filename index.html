@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HavenSpace | Room Wishlist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { 
+      font-family: 'Plus Jakarta Sans', sans-serif; 
+      background: #f8fafc;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body class="text-slate-800">
+
+  <nav class="sticky top-0 z-50 bg-white/70 backdrop-blur-md border-b border-slate-100">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="bg-indigo-600 p-2 rounded-lg">
+          <i data-lucide="home" class="text-white w-5 h-5"></i>
+        </div>
+        <span class="text-xl font-bold tracking-tight text-slate-900">Haven<span class="text-indigo-600">Space.</span></span>
+      </div>
+      <div class="text-sm font-medium text-slate-500 uppercase tracking-widest">Sulthan Rafi Azis</div>
+    </div>
+  </nav>
+
+  <header class="max-w-6xl mx-auto px-6 pt-12 pb-8 text-center md:text-left">
+    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+      Bangun Kamar <span class="gradient-text">Impianmu.</span>
+    </h1>
+    <p class="text-slate-500 mt-4 text-lg max-w-2xl">
+      Kelola daftar belanja furnitur dan dekorasi estetik untuk menciptakan ruang ternyamanmu di satu tempat.
+    </p>
+  </header>
+
+  <section class="max-w-6xl mx-auto px-6 mb-10">
+    <div class="glass-card rounded-3xl shadow-xl shadow-indigo-100/50 p-8">
+      <div class="grid md:grid-cols-4 gap-6">
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-slate-400 uppercase ml-1">Nama Produk</label>
+          <input id="name" type="text" placeholder="Misal: Lampu Sunset" class="w-full border-0 bg-slate-100 rounded-2xl px-5 py-3.5 focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-slate-400 uppercase ml-1">Harga (Rp)</label>
+          <input id="price" type="number" placeholder="Harga" class="w-full border-0 bg-slate-100 rounded-2xl px-5 py-3.5 focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+        </div>
+        <div class="space-y-2">
+          <label class="text-xs font-bold text-slate-400 uppercase ml-1">Tautan Produk</label>
+          <input id="link" type="url" placeholder="https://shopee.co.id/..." class="w-full border-0 bg-slate-100 rounded-2xl px-5 py-3.5 focus:ring-2 focus:ring-indigo-400 outline-none transition" />
+        </div>
+        <div class="flex items-end">
+          <button onclick="addItem()" class="w-full bg-indigo-600 hover:bg-indigo-700 hover:shadow-lg hover:shadow-indigo-200 text-white rounded-2xl py-3.5 font-bold transition-all transform active:scale-95 flex items-center justify-center gap-2">
+            <i data-lucide="plus-circle" class="w-5 h-5"></i> Tambah Item
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-6 mt-6 mb-12">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center gap-4">
+          <div class="p-3 bg-blue-50 rounded-2xl text-blue-600">
+            <i data-lucide="shopping-bag" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-slate-500">Total Item</p>
+            <h2 id="totalItems" class="text-2xl font-bold text-slate-900">0</h2>
+          </div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+        <div class="flex items-center gap-4">
+          <div class="p-3 bg-emerald-50 rounded-2xl text-emerald-600">
+            <i data-lucide="wallet" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <p class="text-sm font-medium text-slate-500">Estimasi Budget</p>
+            <h2 id="totalPrice" class="text-2xl font-bold text-slate-900">Rp 0</h2>
+          </div>
+        </div>
+      </div>
+      <div class="hidden md:flex bg-indigo-600 rounded-3xl p-6 shadow-indigo-200 shadow-lg items-center justify-between text-white">
+        <div>
+          <p class="opacity-80 text-sm">Target Ruangan</p>
+          <h2 class="text-xl font-bold">Bedroom Zen</h2>
+        </div>
+        <i data-lucide="sparkles" class="w-8 h-8 opacity-50"></i>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-6xl mx-auto px-6 pb-20">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-slate-900">Daftar Keinginan</h2>
+      <div class="h-px flex-1 bg-slate-100 mx-6"></div>
+    </div>
+    <div id="list" class="grid md:grid-cols-3 gap-8">
+      </div>
+  </section>
+
+  <script>
+    let items = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+    function formatRupiah(num) {
+      return 'Rp ' + num.toLocaleString('id-ID');
+    }
+
+    function save() {
+      localStorage.setItem('wishlist', JSON.stringify(items));
+    }
+
+    function render() {
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+
+      if (items.length === 0) {
+        list.innerHTML = `
+          <div class="col-span-full py-20 text-center">
+            <div class="bg-slate-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i data-lucide="package-search" class="w-10 h-10 text-slate-300"></i>
+            </div>
+            <p class="text-slate-400 font-medium">Belum ada barang di wishlist kamu.</p>
+          </div>
+        `;
+      }
+
+      let total = 0;
+      items.forEach((item, index) => {
+        total += item.price;
+        list.innerHTML += `
+          <div class="group bg-white rounded-[2rem] overflow-hidden shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 border border-slate-50">
+            <div class="p-6">
+              <div class="flex justify-between items-start mb-4">
+                <div class="bg-indigo-50 text-indigo-600 p-2 rounded-xl">
+                  <i data-lucide="box" class="w-5 h-5"></i>
+                </div>
+                <button onclick="removeItem(${index})" class="text-slate-300 hover:text-red-500 transition-colors">
+                  <i data-lucide="trash-2" class="w-5 h-5"></i>
+                </button>
+              </div>
+              <h3 class="font-bold text-xl text-slate-800 mb-1 truncate">${item.name}</h3>
+              <p class="text-indigo-600 font-extrabold text-lg mb-6">${formatRupiah(item.price)}</p>
+              
+              <a href="${item.link}" target="_blank" class="w-full inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 px-4 rounded-2xl transition-all">
+                Cek di Toko <i data-lucide="external-link" class="w-4 h-4"></i>
+              </a>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('totalItems').innerText = items.length;
+      document.getElementById('totalPrice').innerText = formatRupiah(total);
+      lucide.createIcons(); // Re-render icons
+    }
+
+    function addItem() {
+      const name = document.getElementById('name').value;
+      const price = Number(document.getElementById('price').value);
+      const link = document.getElementById('link').value;
+
+      if (!name || !price || !link) {
+        alert('Mohon lengkapi semua data barang terlebih dahulu');
+        return;
+      }
+
+      items.push({ name, price, link });
+      save();
+      render();
+
+      // Reset form with focus
+      document.getElementById('name').value = '';
+      document.getElementById('price').value = '';
+      document.getElementById('link').value = '';
+      document.getElementById('name').focus();
+    }
+
+    function removeItem(index) {
+      if(confirm('Hapus item ini dari daftar?')) {
+        items.splice(index, 1);
+        save();
+        render();
+      }
+    }
+
+    // Initialize icons and render
+    render();
+    lucide.createIcons();
+  </script>
+
+</body>
+</html>
