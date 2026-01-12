@@ -269,11 +269,15 @@ const firebaseConfig = {
               </div>
               <h3 class="text-2xl font-black text-slate-800 mb-2">${item.name}</h3>
               <p class="text-3xl font-black text-indigo-600 mb-8">Rp ${(item.price || 0).toLocaleString('id-ID')}</p>
-              ${item.link ? `
-                <a href="${item.link}" target="_blank" class="flex items-center justify-center gap-3 w-full bg-slate-900 text-white py-5 rounded-3xl font-bold hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200">
-                  DETAIL PRODUK <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
-                </a>
-              ` : ''}
+${item.link ? `
+  <a href="${item.link}" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     onclick="handleShopeeLink(event, '${item.link}')"
+     class="flex items-center justify-center gap-3 w-full bg-slate-900 text-white py-5 rounded-3xl font-bold hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200">
+    DETAIL PRODUK <i data-lucide="arrow-up-right" class="w-5 h-5"></i>
+  </a>
+` : ''}
             </div>
           `;
         });
@@ -317,6 +321,25 @@ const firebaseConfig = {
     window.removeItem = async (id) => {
       if(confirm('Hapus item ini?')) await deleteDoc(doc(db, "wishlist", id));
     };
+
+    window.handleShopeeLink = (event, url) => {
+    // Cek apakah ini link Shopee
+    if (url.includes('shopee.co.id')) {
+        // Mencoba format Deep Link khusus Shopee
+        // Format: shopeeid://product/ atau langsung URL dengan prefix universal
+        const shopeeAppUrl = url.replace('https://', 'shopeeid://');
+        
+        // Coba buka aplikasi
+        window.location.href = shopeeAppUrl;
+        
+        // Berikan delay kecil, jika aplikasi tidak terinstall, buka di browser biasa
+        setTimeout(() => {
+            window.open(url, '_blank');
+        }, 500);
+        
+        event.preventDefault();
+    }
+};
   </script>
 </body>
 </html>
